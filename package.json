@@ -1,0 +1,7 @@
+git init
+git add .
+git commit -m "Primera versión de audcadpro.es"
+git branch -M main
+# crea un repo vacío en GitHub llamado audcadpro
+git remote add origin https://github.com/AUDCADPRO/audcadpro.git
+git push -u origin main
