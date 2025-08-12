@@ -107,6 +107,46 @@ const faqSchema = {
   ]
 };
 
+// --- JSON-LD (Organization & WebSite) ---
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AUDCAD PRO",
+  "url": "https://www.audcadpro.es",
+  "logo": "https://www.audcadpro.es/icon.png",
+  "email": "mailto:jandroinvestor@gmail.com",
+  "sameAs": [
+    // Añade redes cuando las tengas:
+    // "https://t.me/tu_canal",
+    // "https://x.com/tu_usuario",
+    // "https://www.youtube.com/@tu_canal"
+  ],
+  "foundingDate": "2022",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "ES"
+  },
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "mailto:jandroinvestor@gmail.com",
+    "availableLanguage": ["es"]
+  }]
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AUDCAD PRO",
+  "url": "https://www.audcadpro.es"
+  // Si en el futuro añades buscador:
+  // "potentialAction": {
+  //   "@type": "SearchAction",
+  //   "target": "https://www.audcadpro.es/buscar?q={search_term_string}",
+  //   "query-input": "required name=search_term_string"
+  // }
+};
+
 // --- METADATA ---
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.audcadpro.es"),
@@ -115,7 +155,7 @@ export const metadata: Metadata = {
     template: "%s | AUDCAD PRO",
   },
   description:
-    "Copytrading transparente en el par AUDCAD con enfoque conservador, reglas claras y métricas verificables en Myfxbook. Broker: VT Markets.",
+    "Copytrading transparente en el par AUDCAD con enfoque conservador, reglas claras y métrricas verificables en Myfxbook. Broker: VT Markets.",
   keywords: [
     "AUDCAD",
     "copytrading",
@@ -162,6 +202,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head>
+        {/* JSON-LD Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+        {/* JSON-LD WebSite */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         {/* JSON-LD SSR para FAQ (visible en “Ver código fuente”) */}
         <script
           type="application/ld+json"
