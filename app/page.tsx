@@ -113,36 +113,42 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       {/* NAV */}
       <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/70 border-b border-neutral-700">
-        <div className="mx-auto max-w-7xl px-4 py-5 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3">
-            <Image
-              src="/icon.png"
-              alt="AUDCAD PRO"
-              width={56}
-              height={56}
-              priority
-              className="h-14 w-14 rounded-xl object-cover shadow-sm"
-              sizes="56px"
-            />
-            <span className="ml-2 text-5xl font-extrabold text-neutral-100 tracking-wide">
-              AUDCAD <span className="text-teal-300">PRO</span>
-            </span>
-          </a>
+  <div className="mx-auto max-w-7xl px-4 py-5
+                  flex flex-wrap items-center justify-between gap-3">
+    {/* Marca */}
+    <a href="/" className="flex items-center gap-3 min-w-0">
+      <img
+        alt="AUDCAD PRO"
+        width={56}
+        height={56}
+        className="h-14 w-14 rounded-xl object-cover shadow-sm"
+        src="/icon.png"
+      />
+      <span className="ml-2 text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-100 tracking-wide">
+        AUDCAD <span className="text-teal-300">PRO</span>
+      </span>
+    </a>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
-            <a href="#features" className="hover:text-white">Estrategia</a>
-            <a href="#performance" className="hover:text-white">Resultados</a>
-            <a href="#how" className="hover:text-white">Cómo empezar</a>
-            <a href="#faq" className="hover:text-white">FAQ</a>
-          </nav>
-          <a
-            href="https://vtm.pro/nq2Aza"
-            className="inline-flex items-center rounded-xl border border-teal-500/40 px-4 py-2 text-sm font-medium text-teal-100 hover:bg-teal-600/10"
-          >
-            Conectar en VT Markets
-          </a>
-        </div>
-      </header>
+    {/* Navegación (solo en desktop) */}
+    <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
+      <a href="#features" className="hover:text-white">Estrategia</a>
+      <a href="#performance" className="hover:text-white">Resultados</a>
+      <a href="#how" className="hover:text-white">Cómo empezar</a>
+      <a href="#faq" className="hover:text-white">FAQ</a>
+    </nav>
+
+    {/* CTA: en móvil a otra línea, ancho completo */}
+    <a
+      href="https://vtm.pro/nq2Aza"
+      className="order-3 w-full sm:w-auto text-center
+                 inline-flex items-center rounded-xl border border-teal-500/40
+                 px-4 py-2 text-sm font-medium text-teal-100 hover:bg-teal-600/10"
+    >
+      Conectar en VT Markets
+    </a>
+  </div>
+</header>
+
 
       {/* HERO */}
       <section className="relative overflow-hidden">
