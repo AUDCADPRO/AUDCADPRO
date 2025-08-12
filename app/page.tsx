@@ -276,7 +276,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     className="block"
   >
     <img
-      src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=6"
+      src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=8"
       alt="Estadísticas AUDCAD PRO en Myfxbook"
       width={1200}
       height={800}
