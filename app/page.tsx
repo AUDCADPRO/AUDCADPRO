@@ -269,17 +269,23 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           </div>
 
           <div className="mt-6 rounded-xl border border-neutral-800 overflow-hidden bg-white">
-  <div className="aspect-[16/9]">
-    <iframe
-      src="https://widgets.myfxbook.com/widgets/11648035/large"
-      title="Myfxbook AUDCAD PRO"
-      className="w-full h-full"
-      frameBorder={0}
-      scrolling="no"
-      referrerPolicy="no-referrer-when-downgrade"
+  <a
+    href="https://www.myfxbook.com/members/JmarioFX/aud-cad-pro/11648035"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="block"
+  >
+    <img
+      src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=6"
+      alt="Estadísticas AUDCAD PRO en Myfxbook"
+      width={1200}
+      height={800}
+      loading="lazy"
+      className="w-full h-auto"
     />
-  </div>
+  </a>
 </div>
+
 
         </div>
       </section>
