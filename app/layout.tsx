@@ -114,18 +114,16 @@ const orgSchema = {
   "name": "AUDCAD PRO",
   "url": "https://www.audcadpro.es",
   "logo": "https://www.audcadpro.es/icon.png",
-  "email": "mailto:jandroinvestor@gmail.com",
-  "sameAs": [
-    // Añade redes cuando las tengas:
-    // "https://t.me/tu_canal",
-    // "https://x.com/tu_usuario",
-    // "https://www.youtube.com/@tu_canal"
-  ],
-  "foundingDate": "2022",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "ES"
-  },
+  "email": "mailto:jandroninvestor@gmail.com",
+"sameAs": [
+  "https://t.me/AUDCAD_PRO_MARIO" // tu grupo/canal de Telegram
+],
+"foundingDate": "2022",
+"address": {
+  "@type": "PostalAddress",
+  "addressCountry": "ES"
+},
+
   "contactPoint": [{
     "@type": "ContactPoint",
     "contactType": "customer support",
