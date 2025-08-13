@@ -4,6 +4,20 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import CookiePrefsLink from "./components/CookiePrefsLink";
+// --- Enlaces externos ---
+const TELEGRAM_URL = "https://t.me/AUDCAD_PRO_MARIO"; // <-- tu enlace real
+
+// Icono Telegram (SVG)
+function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path
+        fill="currentColor"
+        d="M9.04 15.52 8.8 19.2c.45 0 .65-.2.88-.43l2.12-2.04 4.4 3.22c.8.44 1.38.2 1.6-.74l2.9-13.6c.25-1.18-.45-1.64-1.22-1.36L2.8 8.6c-1.16.45-1.14 1.1-.2 1.4l4.1 1.28 9.5-6c.45-.28.86-.12.52.16l-7.68 6.92z"
+      />
+    </svg>
+  );
+}
 
 export default function LandingAUDCADPRO() {
   const [openRisk, setOpenRisk] = useState(false);
@@ -282,7 +296,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     className="block"
   >
     <img
-      src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=8"
+      src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=3"
       alt="Estadísticas AUDCAD PRO en Myfxbook"
       width={1200}
       height={800}
@@ -312,6 +326,18 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           <a href="https://vtm.pro/nq2Aza" className="rounded-2xl bg-teal-600/80 hover:bg-teal-600 px-5 py-3 text-sm font-medium">Conectar ahora</a>
           <a href="#contact" className="rounded-2xl border border-neutral-700 px-5 py-3 text-sm font-medium hover:bg-neutral-900">Hablar antes</a>
         </div>
+        <div className="mt-3">
+  <a
+    href={TELEGRAM_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 text-sm text-teal-300 hover:underline"
+  >
+    <TelegramIcon className="h-4 w-4" />
+    Únete al grupo en Telegram
+  </a>
+</div>
+
       </section>
       {/* FAQ */}
 <section id="faq" className="mx-auto max-w-7xl px-4 py-16">
@@ -449,7 +475,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           <div>
             <div className="font-semibold">Síguenos</div>
             <ul className="mt-2 space-y-1 text-neutral-400">
-              <li><a href="#" className="hover:underline">Telegram</a></li>
+              <li><a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:underline">Telegram</a></li>
               <li><a href="#" className="hover:underline">YouTube</a></li>
               <li><a href="#" className="hover:underline">X (Twitter)</a></li>
             </ul>
