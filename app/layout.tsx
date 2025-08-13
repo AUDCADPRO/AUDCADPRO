@@ -80,12 +80,13 @@ export const metadata: Metadata = {
 const pixelLoader = `
 (function(){
   if (typeof window === 'undefined') return;
-  if ((window as any).__fb_pixel_loaded) return;
-  (window as any).__fb_pixel_loaded = true;
+  if (window.__fb_pixel_loaded) return;   // evita duplicados
+  window.__fb_pixel_loaded = true;
+
   var id='${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID ?? ""}';
   if (!id) return;
 
-  !(function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
+  (function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
@@ -95,6 +96,7 @@ const pixelLoader = `
   fbq('init', id);
   fbq('track','PageView');
 })();`;
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -110,16 +112,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {/* Cargar Pixel al aceptar cookies */}
         <Script id="fb-consent-loader" strategy="afterInteractive">
-          {`
-            if (localStorage.getItem('ads_consent') === 'granted') {
-              ${pixelLoader}
-            }
-            window.addEventListener('consent:granted', () => { ${pixelLoader} });
-            window.addEventListener('consent:revoked', () => {
-              if (window.fbq) { window.fbq('consent','revoke'); }
-            });
-          `}
-        </Script>
+  {`
+    if (localStorage.getItem('ads_consent') === 'granted') {
+      ${pixelLoader}
+    }
+    window.addEventListener('consent:granted', () => { ${pixelLoader} });
+    window.addEventListener('consent:revoked', () => {
+      if (window.fbq) { window.fbq('consent','revoke'); }
+    });
+  `}
+</Script>
+
 
         {children}
         <CookieBanner />
