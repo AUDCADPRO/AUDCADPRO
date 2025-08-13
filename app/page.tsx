@@ -38,7 +38,7 @@ export default function LandingAUDCADPRO() {
   const kpis = {
     monthly: "5.19%",   // Myfxbook: Monthly
     drawdown: "5.49%",  // Myfxbook: Drawdown
-    winrate: "491%",    // ← Win % real de Myfxbook
+    winrate: "49%",    // ← Win % real de Myfxbook
   };
 
   // Días activo (inicio real: 2022-09-20)
