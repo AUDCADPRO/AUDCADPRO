@@ -12,13 +12,13 @@ export default function CookieBanner() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    // Mostrar si no hay consentimiento guardado
     const consent = localStorage.getItem("ads_consent");
     if (!consent) setOpen(true);
 
+    // Permitir reabrir desde otras partes y desde consola
     const openHandler = () => setOpen(true);
     window.addEventListener("open-cookie-banner", openHandler);
-
-    // utilidades para depurar desde consola
     window.showCookieBanner = () => setOpen(true);
     window.consentStatus = () => localStorage.getItem("ads_consent");
 
@@ -44,7 +44,8 @@ export default function CookieBanner() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 bg-neutral-950/95 border-t border-neutral-800 p-4 text-sm text-neutral-200">
+    <div id="cookie-banner" data-cookie-banner="open"
+         className="fixed inset-x-0 bottom-0 z-50 bg-neutral-950/95 border-t border-neutral-800 p-4 text-sm text-neutral-200">
       <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <p>
           Usamos cookies de analítica/marketing (Meta) para medir y mejorar.
