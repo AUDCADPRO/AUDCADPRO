@@ -1,10 +1,12 @@
 // app/layout.tsx
 import "../styles/globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import CookieBanner from "./components/CookieBanner";
 import Script from "next/script";
+import Navbar from "./components/Navbar";
+import TelegramFloat from "./components/TelegramFloat";
 
-// --- JSON-LD (FAQ) para SEO, renderizado en servidor ---
+/* ===== JSON-LD (FAQ) ===== */
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -24,7 +26,7 @@ const faqSchema = {
   ]
 };
 
-// --- JSON-LD (Organization & WebSite) ---
+/* ===== JSON-LD (Organization & WebSite) ===== */
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -50,11 +52,12 @@ const websiteSchema = {
   "url": "https://www.audcadpro.es"
 };
 
-// --- METADATA ---
+/* ===== METADATA ===== */
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.audcadpro.es"),
   title: { default: "AUDCAD PRO — Copytrading serio en AUDCAD", template: "%s | AUDCAD PRO" },
-  description: "Copytrading transparente en el par AUDCAD con enfoque conservador, reglas claras y métrricas verificables en Myfxbook. Broker: VT Markets.",
+  description:
+    "Copytrading transparente en el par AUDCAD con enfoque conservador, reglas claras y métrricas verificables en Myfxbook. Broker: VT Markets.",
   keywords: ["AUDCAD", "copytrading", "forex", "algoritmo", "VT Markets", "Myfxbook", "trading"],
   alternates: { canonical: "/" },
   openGraph: {
@@ -62,21 +65,27 @@ export const metadata: Metadata = {
     url: "https://www.audcadpro.es/",
     siteName: "AUDCAD PRO",
     title: "AUDCAD PRO — Copytrading serio en AUDCAD",
-    description: "Copytrading en AUDCAD con enfoque conservador y resultados auditados. Transparencia y control del riesgo.",
+    description:
+      "Copytrading en AUDCAD con enfoque conservador y resultados auditados. Transparencia y control del riesgo.",
     images: [{ url: "/og-audcadpro.png", width: 1200, height: 630, alt: "AUDCAD PRO — Resultados auditados" }]
   },
   twitter: {
     card: "summary_large_image",
     title: "AUDCAD PRO — Copytrading serio en AUDCAD",
-    description: "Resultados auditados en Myfxbook. Enfoque conservador, reglas claras y reportes mensuales.",
+    description:
+      "Resultados auditados en Myfxbook. Enfoque conservador, reglas claras y reportes mensuales.",
     images: ["/og-audcadpro.png"]
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/icon.png", apple: "/apple-icon.png" },
+  icons: { icon: "/icon.png", apple: "/apple-icon.png" }
+};
+
+/* >>> Mover themeColor a viewport (elimina el warning de Next) <<< */
+export const viewport: Viewport = {
   themeColor: "#0f172a"
 };
 
-// --- Loader del Pixel (se ejecuta tras consentimiento) ---
+/* ===== Loader del Pixel (se ejecuta tras consentimiento) ===== */
 const pixelLoader = `
 (function(){
   if (typeof window === 'undefined') return;
@@ -97,7 +106,6 @@ const pixelLoader = `
   fbq('track','PageView');
 })();`;
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
@@ -110,22 +118,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </head>
       <body>
+        {/* Navbar en todo el sitio */}
+        <Navbar />
+
+        {/* Contenido de cada página */}
+        {children}
+
+        {/* Botón flotante de Telegram */}
+        <TelegramFloat />
+
+        {/* Banner de cookies */}
+        <CookieBanner />
+
         {/* Cargar Pixel al aceptar cookies */}
         <Script id="fb-consent-loader" strategy="afterInteractive">
-  {`
-    if (localStorage.getItem('ads_consent') === 'granted') {
-      ${pixelLoader}
-    }
-    window.addEventListener('consent:granted', () => { ${pixelLoader} });
-    window.addEventListener('consent:revoked', () => {
-      if (window.fbq) { window.fbq('consent','revoke'); }
-    });
-  `}
-</Script>
-
-
-        {children}
-        <CookieBanner />
+          {`
+            if (localStorage.getItem('ads_consent') === 'granted') {
+              ${pixelLoader}
+            }
+            window.addEventListener('consent:granted', () => { ${pixelLoader} });
+            window.addEventListener('consent:revoked', () => {
+              if (window.fbq) { window.fbq('consent','revoke'); }
+            });
+          `}
+        </Script>
       </body>
     </html>
   );
