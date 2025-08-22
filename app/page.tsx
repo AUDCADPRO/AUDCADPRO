@@ -137,76 +137,91 @@ export default function LandingAUDCADPRO() {
         </div>
       </header>
 
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(20,184,166,0.20),transparent)]" />
-        <div className="mx-auto max-w-7xl px-4 pt-16 pb-12 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-semibold leading-tight"
-            >
-              Copytrading serio y transparente <span className="text-teal-300">en AUDCAD</span>
-            </motion.h1>
-            <p className="mt-4 text-neutral-300 max-w-xl">
-              Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque conservador, reglas claras y reportes mensuales.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="https://vtm.pro/nq2Aza"
-                className="rounded-2xl bg-teal-600/80 hover:bg-teal-600 px-5 py-3 text-sm font-medium"
-              >
-                Empezar ahora
-              </a>
-              <button
-                onClick={() => setOpenRisk(true)}
-                className="rounded-2xl border border-neutral-700 px-5 py-3 text-sm font-medium hover:bg-neutral-900"
-              >
-                Leer aviso de riesgos
-              </button>
-            </div>
-            <div className="mt-8 flex items-center gap-8 text-xs text-neutral-400">
-              <div>
-                <div className="font-semibold text-neutral-200">Broker</div>
-                VT Markets (entorno regulado)
-              </div>
-              <div>
-                <div className="font-semibold text-neutral-200">Par</div>
-                AUDCAD (Forex)
-              </div>
-              <div>
-                <div className="font-semibold text-neutral-200">Estrategia</div>
-                Algorítmica conservadora
-              </div>
-            </div>
-          </div>
+      {/* HERO (mismo markup, clases ajustadas para móvil) */}
+<section className="relative overflow-hidden">
+  <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(20,184,166,0.20),transparent)]" />
+  <div
+    className="mx-auto max-w-7xl px-4
+               pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12
+               grid md:grid-cols-2 gap-8 sm:gap-10 items-center"
+  >
+    <div>
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl sm:text-4xl md:text-5xl font-semibold
+                   leading-snug sm:leading-snug md:leading-tight"
+      >
+        Copytrading serio y transparente <span className="text-teal-300">en AUDCAD</span>
+      </motion.h1>
 
-          {/* WIDGET MYFXBOOK */}
-          <div className="relative">
-            <div className="aspect-video rounded-3xl bg-neutral-900/70 border border-neutral-800 p-2">
-              <div className="h-full w-full rounded-xl overflow-hidden bg-white">
-                <a
-                  href="https://www.myfxbook.com/members/JmarioFX/aud-cad-pro/11648035"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: "block", width: "100%", height: "100%" }}
-                >
-                  <img
-                    src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=6"
-                    alt="Estadísticas AUDCAD PRO en Myfxbook"
-                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                  />
-                </a>
-              </div>
-            </div>
-            <div className="absolute -bottom-4 -left-4 hidden md:block rounded-2xl bg-neutral-900/70 border border-neutral-800 px-4 py-3 text-xs text-neutral-300">
-              MyFxbook — Datos Auditados (REAL)
-            </div>
-          </div>
+      <p className="mt-3 sm:mt-4 text-neutral-300 text-base sm:text-lg max-w-lg">
+        Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque conservador, reglas claras y reportes mensuales.
+      </p>
+
+      {/* CTAs: apilados al 100% en móvil; en fila desde sm */}
+      <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-3">
+        <a
+          href="https://vtm.pro/nq2Aza"
+          className="w-full sm:w-auto text-center
+                     rounded-2xl bg-teal-600/80 hover:bg-teal-600
+                     px-5 py-3 text-sm font-medium"
+        >
+          Empezar ahora
+        </a>
+        <button
+          onClick={() => setOpenRisk(true)}
+          className="w-full sm:w-auto text-center
+                     rounded-2xl border border-neutral-700
+                     px-5 py-3 text-sm font-medium hover:bg-neutral-900"
+        >
+          Leer aviso de riesgos
+        </button>
+      </div>
+
+      {/* Métricas: tipografía más compacta en móvil */}
+      <div className="mt-6 flex flex-wrap gap-6 sm:gap-8 text-[11px] sm:text-xs text-neutral-400">
+        <div>
+          <div className="font-semibold text-neutral-200">Broker</div>
+          VT Markets (entorno regulado)
         </div>
-      </section>
+        <div>
+          <div className="font-semibold text-neutral-200">Par</div>
+          AUDCAD (Forex)
+        </div>
+        <div>
+          <div className="font-semibold text-neutral-200">Estrategia</div>
+          Algorítmica conservadora
+        </div>
+      </div>
+    </div>
+
+    {/* WIDGET MYFXBOOK (sin cambios funcionales) */}
+    <div className="relative">
+      <div className="aspect-video rounded-3xl bg-neutral-900/70 border border-neutral-800 p-2">
+        <div className="h-full w-full rounded-xl overflow-hidden bg-white">
+          <a
+            href="https://www.myfxbook.com/members/JmarioFX/aud-cad-pro/11648035"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "block", width: "100%", height: "100%" }}
+          >
+            <img
+              src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=6"
+              alt="Estadísticas AUDCAD PRO en Myfxbook"
+              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            />
+          </a>
+        </div>
+      </div>
+      <div className="absolute -bottom-4 -left-4 hidden md:block rounded-2xl bg-neutral-900/70 border border-neutral-800 px-4 py-3 text-xs text-neutral-300">
+        MyFxbook — Datos Auditados (REAL)
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* FEATURES */}
       <section id="features" className="mx-auto max-w-7xl px-4 py-16">

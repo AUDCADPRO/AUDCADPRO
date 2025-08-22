@@ -142,3 +142,34 @@ body {
   .hero h1 { font-size: 30px; }
   .hero p { font-size: 16px; }
 }
+/* ===== HERO compacto en la HOME ===== */
+.home-hero { /* úsalo sólo en la portada */
+  background: radial-gradient(1100px 520px at 20% -10%, rgba(56,189,248,.18), transparent 60%),
+              radial-gradient(1100px 520px at 80% -20%, rgba(16,185,129,.16), transparent 55%),
+              #0b1220;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.home-hero-inner {
+  max-width: 1100px; margin: 0 auto; padding: 64px 16px 36px; /* desktop */
+}
+.home-hero h1 { color:#fff; font-size: 52px; line-height: 1.05; margin: 0 0 10px; }
+.home-hero p.sub { color:#cbd5e1; font-size: 20px; margin: 0 0 20px; }
+
+.hero-ctas { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-ctas a { padding:14px 18px; border-radius:12px; font-weight:800; text-decoration:none; }
+.hero-ctas .cta-primary  { background:#10b981; color:#fff; box-shadow:0 8px 20px rgba(16,185,129,.28); }
+.hero-ctas .cta-secondary{ background:#111827; color:#fff; }
+
+/* Versión compacta en pantallas pequeñas */
+@media (max-width: 520px){
+  .home-hero-inner { padding: 28px 16px 18px; }
+  .home-hero h1    { font-size: 30px; line-height: 1.15; margin-bottom: 6px; }
+  .home-hero p.sub { font-size: 16px; margin-bottom: 12px; }
+  .hero-ctas       { gap:10px; }
+  .hero-ctas a     { width: 100%; text-align: center; padding: 12px 14px; } /* botones a 100% */
+}
+
+/* Para evitar choque con el botón flotante en móviles muy estrechos */
+@media (max-width: 480px){
+  .home-hero-inner { padding-bottom: 28px; }
+}
