@@ -137,14 +137,12 @@ export default function LandingAUDCADPRO() {
         </div>
       </header>
 
-      {/* HERO (mismo markup, clases ajustadas para móvil) */}
+      {/* HERO (compacto en móvil) */}
 <section className="relative overflow-hidden">
   <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(20,184,166,0.20),transparent)]" />
-  <div
-    className="mx-auto max-w-7xl px-4
-               pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12
-               grid md:grid-cols-2 gap-8 sm:gap-10 items-center"
-  >
+  <div className="mx-auto max-w-7xl px-4
+                  pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12
+                  grid md:grid-cols-2 gap-8 sm:gap-10 items-center">
     <div>
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
@@ -153,34 +151,34 @@ export default function LandingAUDCADPRO() {
         className="text-3xl sm:text-4xl md:text-5xl font-semibold
                    leading-snug sm:leading-snug md:leading-tight"
       >
-        Copytrading serio y transparente <span className="text-teal-300">en AUDCAD</span>
+        Copytrading serio y transparente{" "}
+        <span className="text-teal-300">en AUDCAD</span>
       </motion.h1>
 
       <p className="mt-3 sm:mt-4 text-neutral-300 text-base sm:text-lg max-w-lg">
-        Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque conservador, reglas claras y reportes mensuales.
+        Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque
+        conservador, reglas claras y reportes mensuales.
       </p>
 
-      {/* CTAs: apilados al 100% en móvil; en fila desde sm */}
+      {/* CTAs: apilados a 100% en móvil, en fila en ≥sm */}
       <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-3">
         <a
           href="https://vtm.pro/nq2Aza"
-          className="w-full sm:w-auto text-center
-                     rounded-2xl bg-teal-600/80 hover:bg-teal-600
-                     px-5 py-3 text-sm font-medium"
+          className="w-full sm:w-auto rounded-2xl bg-teal-600/80 hover:bg-teal-600
+                     px-5 py-3 text-sm font-medium text-center"
         >
           Empezar ahora
         </a>
         <button
           onClick={() => setOpenRisk(true)}
-          className="w-full sm:w-auto text-center
-                     rounded-2xl border border-neutral-700
-                     px-5 py-3 text-sm font-medium hover:bg-neutral-900"
+          className="w-full sm:w-auto rounded-2xl border border-neutral-700
+                     px-5 py-3 text-sm font-medium hover:bg-neutral-900 text-center"
         >
           Leer aviso de riesgos
         </button>
       </div>
 
-      {/* Métricas: tipografía más compacta en móvil */}
+      {/* Mini-métricas más compactas en móvil */}
       <div className="mt-6 flex flex-wrap gap-6 sm:gap-8 text-[11px] sm:text-xs text-neutral-400">
         <div>
           <div className="font-semibold text-neutral-200">Broker</div>
@@ -197,7 +195,7 @@ export default function LandingAUDCADPRO() {
       </div>
     </div>
 
-    {/* WIDGET MYFXBOOK (sin cambios funcionales) */}
+    {/* WIDGET MYFXBOOK */}
     <div className="relative">
       <div className="aspect-video rounded-3xl bg-neutral-900/70 border border-neutral-800 p-2">
         <div className="h-full w-full rounded-xl overflow-hidden bg-white">
@@ -221,7 +219,6 @@ export default function LandingAUDCADPRO() {
     </div>
   </div>
 </section>
-
 
       {/* FEATURES */}
       <section id="features" className="mx-auto max-w-7xl px-4 py-16">
