@@ -1,72 +1,70 @@
-// components/Navbar.jsx
+// app/components/Navbar.tsx
 "use client";
 import Link from "next/link";
-
-const navStyle = {
-  position: "sticky",
-  top: 0,
-  zIndex: 50,
-  width: "100%",
-  background: "#0b1220",
-  color: "white",
-  borderBottom: "1px solid rgba(255,255,255,0.08)",
-};
-
-const btn = {
-  padding: "10px 14px",
-  borderRadius: "10px",
-  fontWeight: 700,
-  textDecoration: "none",
-};
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  // Cierra el menú al cambiar de tamaño a desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 980) setOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
-    <header style={navStyle}>
-      <nav
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "10px 16px",
-        }}
-      >
-        <Link href="/" style={{ fontWeight: 800, letterSpacing: "0.5px" }}>
-          AUDCAD PRO
-        </Link>
+    <header className="nav">
+      <nav className="nav-inner">
+        <Link href="/" className="nav-brand">AUDCAD PRO</Link>
 
-        <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-          <Link href="/guias/abrir-verificar" style={{ opacity: 0.9 }}>
-            Guía: Abrir cuenta
-          </Link>
-          <Link href="/guias/vincular-copy" style={{ opacity: 0.9 }}>
-            Guía: Vincular Copy
-          </Link>
-<Link href="/sobre-la-estrategia" style={{ opacity: 0.9 }}>
-  Estrategia
-</Link>
-<Link href="/sobre-mi" style={{ opacity: 0.9 }}>
-  Sobre mí
-</Link>
-
-          {/* CTA de Telegram MUY visible */}
+        {/* Desktop links */}
+        <div className="nav-links">
+          <Link href="/guias/abrir-verificar">Guía: Abrir cuenta</Link>
+          <Link href="/guias/vincular-copy">Guía: Vincular Copy</Link>
+          <Link href="/sobre-la-estrategia">Estrategia</Link>
+          <Link href="/sobre-mi">Sobre mí</Link>
           <Link
-            href="https://t.me/AUDCAD_PRO_MARIO"  // <-- sustituye por tu enlace real
+            href="https://t.me/AUDCAD_PRO_MARIO"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              ...btn,
-              background:
-                "linear-gradient(135deg, rgba(34,197,94,1) 0%, rgba(16,185,129,1) 100%)",
-              boxShadow: "0 10px 18px rgba(16,185,129,0.35)",
-              color: "white",
-            }}
+            className="nav-cta"
           >
             Únete al Telegram
           </Link>
         </div>
+
+        {/* Mobile toggle */}
+        <button
+          aria-label="Abrir menú"
+          className="nav-toggle"
+          onClick={() => setOpen(v => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </nav>
+
+      {/* Mobile drawer */}
+      <div className={`nav-drawer ${open ? "open" : ""}`}>
+        <Link href="/guias/abrir-verificar" onClick={() => setOpen(false)}>Guía: Abrir cuenta</Link>
+        <Link href="/guias/vincular-copy" onClick={() => setOpen(false)}>Guía: Vincular Copy</Link>
+        <Link href="/sobre-la-estrategia" onClick={() => setOpen(false)}>Estrategia</Link>
+        <Link href="/sobre-mi" onClick={() => setOpen(false)}>Sobre mí</Link>
+        <a
+          href="https://t.me/AUDCAD_PRO_MARIO"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-cta"
+          onClick={() => setOpen(false)}
+        >
+          Únete al Telegram
+        </a>
+      </div>
+
+      {/* Backdrop */}
+      {open && <div className="nav-backdrop" onClick={() => setOpen(false)} />}
     </header>
   );
 }
