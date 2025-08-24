@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 const FALLBACK_CONFIG = {
   brand: "AUDCAD PRO",
   agentName: "JMario",
+  brokerLink: "https://vtm.pro/nq2Aza",
   vtradeLink: "https://social.vtacademy.net/portal/login", // Enlace de oferta personalizada VTrade
   whatsappLink: "https://wa.me/34602099692?text=Hola%20quiero%20info%20del%20copy%20AUDCAD%20PRO",
   myfxbookWidgetSrc: "", // Pega aquí tu iframe src si lo tienes (opcional)
@@ -32,7 +33,7 @@ const FALLBACK_CONFIG = {
     "Alta y suscripción en minutos",
     "Sin letra pequeña: performance fee del 20%",
   ],
-  minDepositText: "Depósito recomendado: 100 USD (o cuenta USC si prefieres centavos)",
+  minDepositText: "Capital mínimo para esta estrategia: 1000 USD",
 };
 
 function useQueryConfig() {
@@ -128,6 +129,12 @@ export default function AgentLanding() {
               >
                 Unirse al Copy (enlace personalizado)
               </a>
+              <a
+  href={cfg.brokerLink}
+  className="inline-flex items-center justify-center rounded-xl px-5 py-3 border border-zinc-300 hover:bg-zinc-100"
+>
+  Crear cuenta en el broker
+</a>
               <a
                 href={cfg.whatsappLink}
                 className="inline-flex items-center justify-center rounded-xl px-5 py-3 border border-zinc-300 hover:bg-zinc-100"
