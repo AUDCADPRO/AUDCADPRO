@@ -10,7 +10,7 @@ import CookiePrefsLink from "../../components/CookiePrefsLink";
 
 // --- Enlaces externos (EDITA AQUÍ si hiciera falta) ---
 const TELEGRAM_URL = "https://t.me/AUDCAD_PRO_MARIO";
-const VTRADE_URL   = "https://social.vtacademy.net/portal/registration/subscription/84538/AUDCAD";
+const VTRADE_URL   = "https://social.vtacademy.net/portal/registration/subscription/84538/AUDCAD-PRO";
 const BROKER_URL   = "https://vtm.pro/nq2Aza";
 const WHATSAPP_URL = "https://wa.me/34637191757?text=Hola%20quiero%20info%20del%20copy%20AUDCAD%20PRO";
 
