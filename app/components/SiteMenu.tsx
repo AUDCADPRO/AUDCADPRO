@@ -36,19 +36,15 @@ export default function SiteMenu() {
         "
       >
         <nav className="grid gap-1 text-sm text-neutral-200">
-          {/* Secciones internas de la landing */}
-          <a href="#features" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Estrategia</a>
-          <a href="#performance" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Resultados</a>
-          <a href="#how" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Cómo empezar</a>
-          <a href="#faq" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">FAQ</a>
-
-          <hr className="my-1 border-neutral-800" />
+         
 
           {/* Páginas nuevas */}
           <a href="/guia-abrir-cuenta" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Guía: Abrir cuenta</a>
           <a href="/guia-vincular-copy" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Guía: Vincular Copy</a>
           <a href="/convertirse-en-colaborador" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Convertirse en colaborador</a>
-
+          <a href="/sobre-la-estrategia" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Historia del Algoritmo</a>
+          <a href="/sobre-mi" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">Sobre mi</a>
+          
           <hr className="my-1 border-neutral-800" />
 
           <a
