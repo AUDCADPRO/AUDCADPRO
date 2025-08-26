@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import CookieBanner from "./components/CookieBanner";
 import Script from "next/script";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar"; // ⬅️ Eliminado
 import TelegramFloat from "./components/TelegramFloat";
 
 /* ===== JSON-LD (FAQ) ===== */
@@ -96,7 +96,7 @@ const pixelLoader = `
   if (!id) return;
 
   (function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
-    n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; 
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
     s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
@@ -118,8 +118,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </head>
       <body>
-        {/* Navbar en todo el sitio */}
-        <Navbar />
+        {/* ⛔ Navbar eliminado. El header ahora vive en app/page.tsx con <SiteMenu /> */}
 
         {/* Contenido de cada página */}
         {children}

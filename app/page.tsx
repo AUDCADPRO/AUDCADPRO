@@ -4,9 +4,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import CookiePrefsLink from "./components/CookiePrefsLink";
+import SiteMenu from "./components/SiteMenu";
 
 // --- Enlaces externos ---
-const TELEGRAM_URL = "https://t.me/AUDCAD_PRO_MARIO"; // <-- tu enlace real
+const TELEGRAM_URL = "https://t.me/AUDCAD_PRO_MARIO";
 
 // Icono Telegram (SVG)
 function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -22,6 +23,7 @@ function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export default function LandingAUDCADPRO() {
   const [openRisk, setOpenRisk] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
 
   // ---- FB Pixel: evento de clic a Telegram ----
   function trackTelegram() {
@@ -69,12 +71,10 @@ export default function LandingAUDCADPRO() {
     { q: "¿Ofrecéis asesoramiento financiero?", a: "No. Brindamos información general y la ejecución de una estrategia de copy. No es una recomendación personalizada. Si tienes dudas, consulta con un asesor independiente." }
   ];
 
-  // Estado del envío del formulario
-  const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle');
-
+  // Form
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('sending');
+    setStatus("sending");
 
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -82,27 +82,26 @@ export default function LandingAUDCADPRO() {
     try {
       const res = await fetch(form.action, {
         method: form.method,
-        headers: { Accept: 'application/json' },
+        headers: { Accept: "application/json" },
         body: data,
       });
 
       if (res.ok) {
-        setStatus('ok');
+        setStatus("ok");
         form.reset();
       } else {
-        setStatus('error');
+        setStatus("error");
       }
     } catch {
-      setStatus('error');
+      setStatus("error");
     }
   }
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      {/* NAV */}
+      {/* HEADER */}
       <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/70 border-b border-neutral-700">
-        <div className="mx-auto max-w-7xl px-4 py-5
-                        flex flex-wrap items-center justify-between gap-3">
+        <div className="mx-auto max-w-7xl px-4 py-5 flex flex-wrap items-center justify-between gap-3">
           {/* Marca */}
           <a href="/" className="flex items-center gap-3 min-w-0">
             <img
@@ -117,108 +116,115 @@ export default function LandingAUDCADPRO() {
             </span>
           </a>
 
-          {/* Navegación (solo en desktop) */}
-          <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
-            <a href="#features" className="hover:text-white">Estrategia</a>
-            <a href="#performance" className="hover:text-white">Resultados</a>
-            <a href="#how" className="hover:text-white">Cómo empezar</a>
-            <a href="#faq" className="hover:text-white">FAQ</a>
+          {/* Navegación interna (secciones de la landing) */}
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-300">
+            <a href="#features" className="hover:text-teal-300">Estrategia</a>
+            <a href="#performance" className="hover:text-teal-300">Resultados</a>
+            <a href="#how" className="hover:text-teal-300">Cómo empezar</a>
+            <a href="#faq" className="hover:text-teal-300">FAQ</a>
           </nav>
 
-          {/* CTA */}
-          <a
-            href="https://vtm.pro/nq2Aza"
-            className="order-3 w-full sm:w-auto text-center
-                       inline-flex items-center rounded-xl border border-teal-500/40
-                       px-4 py-2 text-sm font-medium text-teal-100 hover:bg-teal-600/10"
-          >
-            Conectar en VT Markets
-          </a>
+          {/* Menú + CTA VT */}
+          <div className="flex items-center gap-3">
+            <SiteMenu />
+            <a
+              href="https://vtm.pro/nq2Aza"
+              className="inline-flex items-center rounded-xl border border-teal-500/40 px-4 py-2 text-sm font-medium text-teal-100 hover:bg-teal-600/10"
+            >
+              Conectar en VT Markets
+            </a>
+          </div>
         </div>
       </header>
 
-      {/* HERO (compacto en móvil) */}
-<section className="relative overflow-hidden">
-  <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(20,184,166,0.20),transparent)]" />
-  <div className="mx-auto max-w-7xl px-4
-                  pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12
-                  grid md:grid-cols-2 gap-8 sm:gap-10 items-center">
-    <div>
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-semibold
-                   leading-snug sm:leading-snug md:leading-tight"
-      >
-        Copytrading serio y transparente{" "}
-        <span className="text-teal-300">en AUDCAD</span>
-      </motion.h1>
+      {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(20,184,166,0.20),transparent)]" />
+        <div className="mx-auto max-w-7xl px-4 pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12 grid md:grid-cols-2 gap-8 sm:gap-10 items-center">
+          <div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-snug sm:leading-snug md:leading-tight"
+            >
+              Copytrading serio y transparente{" "}
+              <span className="text-teal-300">en AUDCAD</span>
+            </motion.h1>
 
-      <p className="mt-3 sm:mt-4 text-neutral-300 text-base sm:text-lg max-w-lg">
-        Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque
-        conservador, reglas claras y reportes mensuales.
-      </p>
+            <p className="mt-3 sm:mt-4 text-neutral-300 text-base sm:text-lg max-w-lg">
+              Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque
+              conservador, reglas claras y reportes mensuales.
+            </p>
 
-      {/* CTAs: apilados a 100% en móvil, en fila en ≥sm */}
-      <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-3">
-        <a
-          href="https://vtm.pro/nq2Aza"
-          className="w-full sm:w-auto rounded-2xl bg-teal-600/80 hover:bg-teal-600
-                     px-5 py-3 text-sm font-medium text-center"
-        >
-          Empezar ahora
-        </a>
-        <button
-          onClick={() => setOpenRisk(true)}
-          className="w-full sm:w-auto rounded-2xl border border-neutral-700
-                     px-5 py-3 text-sm font-medium hover:bg-neutral-900 text-center"
-        >
-          Leer aviso de riesgos
-        </button>
-      </div>
+            {/* CTAs */}
+            <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://vtm.pro/nq2Aza"
+                className="w-full sm:w-auto rounded-2xl bg-teal-600/80 hover:bg-teal-600 px-5 py-3 text-sm font-medium text-center"
+              >
+                Empezar ahora
+              </a>
+              <button
+                onClick={() => setOpenRisk(true)}
+                className="w-full sm:w-auto rounded-2xl border border-neutral-700 px-5 py-3 text-sm font-medium hover:bg-neutral-900 text-center"
+              >
+                Leer aviso de riesgos
+              </button>
+              <a
+  href={TELEGRAM_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  onClick={trackTelegram}
+  className="w-full sm:w-auto rounded-2xl bg-sky-500 hover:bg-sky-600 px-5 py-3 text-sm font-medium text-center text-white"
+>
+  Únete al Telegram
+</a>
 
-      {/* Mini-métricas más compactas en móvil */}
-      <div className="mt-6 flex flex-wrap gap-6 sm:gap-8 text-[11px] sm:text-xs text-neutral-400">
-        <div>
-          <div className="font-semibold text-neutral-200">Broker</div>
-          VT Markets (entorno regulado)
-        </div>
-        <div>
-          <div className="font-semibold text-neutral-200">Par</div>
-          AUDCAD (Forex)
-        </div>
-        <div>
-          <div className="font-semibold text-neutral-200">Estrategia</div>
-          Algorítmica conservadora
-        </div>
-      </div>
-    </div>
 
-    {/* WIDGET MYFXBOOK */}
-    <div className="relative">
-      <div className="aspect-video rounded-3xl bg-neutral-900/70 border border-neutral-800 p-2">
-        <div className="h-full w-full rounded-xl overflow-hidden bg-white">
-          <a
-            href="https://www.myfxbook.com/members/JmarioFX/aud-cad-pro/11648035"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "block", width: "100%", height: "100%" }}
-          >
-            <img
-              src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=6"
-              alt="Estadísticas AUDCAD PRO en Myfxbook"
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
-            />
-          </a>
+            </div>
+
+            {/* Mini-métricas */}
+            <div className="mt-6 flex flex-wrap gap-6 sm:gap-8 text-[11px] sm:text-xs text-neutral-400">
+              <div>
+                <div className="font-semibold text-neutral-200">Broker</div>
+                VT Markets (entorno regulado)
+              </div>
+              <div>
+                <div className="font-semibold text-neutral-200">Par</div>
+                AUDCAD (Forex)
+              </div>
+              <div>
+                <div className="font-semibold text-neutral-200">Estrategia</div>
+                Algorítmica conservadora
+              </div>
+            </div>
+          </div>
+
+          {/* WIDGET MYFXBOOK */}
+          <div className="relative">
+            <div className="aspect-video rounded-3xl bg-neutral-900/70 border border-neutral-800 p-2">
+              <div className="h-full w-full rounded-xl overflow-hidden bg-white">
+                <a
+                  href="https://www.myfxbook.com/members/JmarioFX/aud-cad-pro/11648035"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                >
+                  <img
+                    src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=6"
+                    alt="Estadísticas AUDCAD PRO en Myfxbook"
+                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="absolute -bottom-4 -left-4 hidden md:block rounded-2xl bg-neutral-900/70 border border-neutral-800 px-4 py-3 text-xs text-neutral-300">
+              MyFxbook — Datos Auditados (REAL)
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="absolute -bottom-4 -left-4 hidden md:block rounded-2xl bg-neutral-900/70 border border-neutral-800 px-4 py-3 text-xs text-neutral-300">
-        MyFxbook — Datos Auditados (REAL)
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* FEATURES */}
       <section id="features" className="mx-auto max-w-7xl px-4 py-16">
@@ -410,17 +416,17 @@ export default function LandingAUDCADPRO() {
             <div className="md:col-span-3">
               <button
                 type="submit"
-                disabled={status === 'sending'}
+                disabled={status === "sending"}
                 className="rounded-xl bg-teal-600/80 hover:bg-teal-600 disabled:opacity-60 px-4 py-3 text-sm font-medium"
               >
-                {status === 'sending' ? 'Enviando…' : 'Enviar'}
+                {status === "sending" ? "Enviando…" : "Enviar"}
               </button>
             </div>
 
             {/* Mensajes de estado */}
             <div className="md:col-span-3" role="status" aria-live="polite">
-              {status === 'ok' && <p className="text-green-400 text-sm mt-2">¡Gracias! Te responderemos en breve.</p>}
-              {status === 'error' && <p className="text-red-400 text-sm mt-2">Ups, hubo un problema. Inténtalo de nuevo.</p>}
+              {status === "ok" && <p className="text-green-400 text-sm mt-2">¡Gracias! Te responderemos en breve.</p>}
+              {status === "error" && <p className="text-red-400 text-sm mt-2">Ups, hubo un problema. Inténtalo de nuevo.</p>}
             </div>
           </form>
 
