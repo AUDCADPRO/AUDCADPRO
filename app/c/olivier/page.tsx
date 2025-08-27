@@ -2,19 +2,20 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-// Opción A: ruta relativa (funciona seguro desde app/c/jmario/)
+
+// Menu del colaborador (ruta correcta: sube 2 niveles desde /app/c/olivier)
+import CollaboratorMenu from "../../components/CollaboratorMenu";
+
+// Utilidades locales
 import CookiePrefsLink from "../../components/CookiePrefsLink";
-// Opción B (si tienes alias @ configurado en tsconfig): 
-// import CookiePrefsLink from "@/components/CookiePrefsLink";
 
-// --- Enlaces externos (EDITA AQUÍ si hiciera falta) ---
-const TELEGRAM_URL = "https://t.me/AUDCAD_PRO_MARIO";
-const VTRADE_URL   = "https://social.vtacademy.net/portal/registration/subscription/84538/AUDCAD-PRO";
-const BROKER_URL   = "https://vtm.pro/nq2Aza";
-const WHATSAPP_URL = "https://wa.me/34637191757?text=Hola%20quiero%20info%20del%20copy%20AUDCAD%20PRO";
+/* ====== Enlaces del COLABORADOR (EDITAR AQUÍ) ====== */
+const TELEGRAM_URL  = "https://t.me/AUDCAD_PRO_MARIO";
+const VTRADE_URL    = "https://social.vtacademy.net/portal/registration/subscription/84538/AUDCAD-PRO"; // Enlace especial
+const BROKER_URL    = "https://vtm.pro/nq2Aza";
+const WHATSAPP_URL  = "https://wa.me/34637191757?text=Hola%20quiero%20info%20del%20copy%20AUDCAD%20PRO";
 
-// Icono Telegram (SVG)
+/* ===== Icono Telegram (SVG) ===== */
 function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
@@ -26,16 +27,15 @@ function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function LandingAUDCADPRO() {
+export default function PageColaboradorOlivier() {
   const [openRisk, setOpenRisk] = useState(false);
 
-  // ---- FB Pixel: evento de clic a Telegram ----
+  // FB Pixel: clic a Telegram
   function trackTelegram() {
     if (typeof window !== "undefined" && (window as any).fbq) {
       (window as any).fbq("trackCustom", "Telegram_Click");
     }
   }
-  // ---------------------------------------------
 
   const features = [
     { title: "Algoritmo conservador", desc: "Gestión del riesgo prioritaria, lógica cuantitativa y control de exposición en AUDCAD." },
@@ -49,11 +49,7 @@ export default function LandingAUDCADPRO() {
     { n: 3, title: "Elige tu riesgo", desc: "Configura el tamaño de copia y límites de pérdida según tu perfil." },
   ];
 
-  const kpis = {
-    monthly: "5.19%",
-    drawdown: "5.49%",
-    winrate: "49%",
-  };
+  const kpis = { monthly: "5.19%", drawdown: "5.49%", winrate: "49%" };
 
   const startDate = new Date("2022-09-20T00:00:00Z");
   const daysActive = Math.floor((Date.now() - startDate.getTime()) / 86_400_000);
@@ -73,55 +69,44 @@ export default function LandingAUDCADPRO() {
     { q: "¿Ofrecéis asesoramiento financiero?", a: "No. Brindamos información general y la ejecución de una estrategia de copy. No es una recomendación personalizada. Si tienes dudas, consulta con un asesor independiente." }
   ];
 
-  const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle');
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('sending');
-
+    setStatus("sending");
     const form = e.currentTarget;
     const data = new FormData(form);
-
     try {
       const res = await fetch(form.action, {
         method: form.method,
-        headers: { Accept: 'application/json' },
+        headers: { Accept: "application/json" },
         body: data,
       });
-
       if (res.ok) {
-        setStatus('ok');
+        setStatus("ok");
         form.reset();
       } else {
-        setStatus('error');
+        setStatus("error");
       }
     } catch {
-      setStatus('error');
+      setStatus("error");
     }
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100">
+    <main className="min-h-screen bg-neutral-950 text-neutral-100">
       {/* NAV */}
       <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/70 border-b border-neutral-700">
-        <div className="mx-auto max-w-7xl px-4 py-5
-                        flex flex-wrap items-center justify-between gap-3">
-
+        <div className="mx-auto max-w-7xl px-4 py-5 flex flex-wrap items-center justify-between gap-3">
           {/* Marca */}
-          <a href="/" className="flex items-center gap-3 min-w-0">
-            <img
-              alt="AUDCAD PRO"
-              width={56}
-              height={56}
-              className="h-14 w-14 rounded-xl object-cover shadow-sm"
-              src="/icon.png"
-            />
+          <a href="/c/olivier" className="flex items-center gap-3 min-w-0">
+            <img alt="AUDCAD PRO" width={56} height={56} className="h-14 w-14 rounded-xl object-cover shadow-sm" src="/icon.png" />
             <span className="ml-2 text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-100 tracking-wide">
               AUDCAD <span className="text-teal-300">PRO</span>
             </span>
           </a>
 
-          {/* Navegación (solo en desktop) */}
+          {/* Navegación (desktop) */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
             <a href="#features" className="hover:text-white">Estrategia</a>
             <a href="#performance" className="hover:text-white">Resultados</a>
@@ -129,19 +114,20 @@ export default function LandingAUDCADPRO() {
             <a href="#faq" className="hover:text-white">FAQ</a>
           </nav>
 
-          {/* CTAs del header */}
+          {/* Derecha: Menú + CTAs */}
           <div className="flex items-center gap-2">
+            {/* Menú con enlace especial del colaborador */}
+            <CollaboratorMenu vtradeUrl={VTRADE_URL} />
+
             <a
               href={VTRADE_URL}
-              className="order-3 w-full sm:w-auto text-center inline-flex items-center rounded-xl bg-teal-600/80 hover:bg-teal-600 px-4 py-2 text-sm font-medium text-white"
+              className="inline-flex items-center rounded-xl bg-teal-600/80 hover:bg-teal-600 px-4 py-2 text-sm font-medium text-white"
             >
               Unirse al Copy
             </a>
             <a
               href={BROKER_URL}
-              className="order-3 w-full sm:w-auto text-center
-                         inline-flex items-center rounded-xl border border-teal-500/40
-                         px-4 py-2 text-sm font-medium text-teal-100 hover:bg-teal-600/10"
+              className="inline-flex items-center rounded-xl border border-teal-500/40 px-4 py-2 text-sm font-medium text-teal-100 hover:bg-teal-600/10"
             >
               Crear cuenta (Broker)
             </a>
@@ -152,56 +138,46 @@ export default function LandingAUDCADPRO() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(20,184,166,0.20),transparent)]" />
-        <div className="mx-auto max-w-7xl px-4
-                        pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12
-                        grid md:grid-cols-2 gap-8 sm:gap-10 items-center">
+        <div className="mx-auto max-w-7xl px-4 pt-10 pb-6 sm:pt-12 sm:pb-8 md:pt-16 md:pb-12 grid md:grid-cols-2 gap-8 sm:gap-10 items-center">
           <div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-semibold
-                         leading-snug sm:leading-snug md:leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-snug sm:leading-snug md:leading-tight"
             >
-              Copytrading serio y transparente{" "}
-              <span className="text-teal-300">en AUDCAD</span>
+              Copytrading serio y transparente <span className="text-teal-300">en AUDCAD</span>
             </motion.h1>
 
             <p className="mt-3 sm:mt-4 text-neutral-300 text-base sm:text-lg max-w-lg">
-              Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque
-              conservador, reglas claras y reportes mensuales.
+              Ejecutado por <strong>AUDCAD PRO</strong> en el broker VT Markets. Enfoque conservador, reglas claras y reportes mensuales.
             </p>
 
             {/* CTAs del hero */}
             <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row gap-3">
               <a
                 href={VTRADE_URL}
-                className="w-full sm:w-auto rounded-2xl bg-teal-600/80 hover:bg-teal-600
-                           px-5 py-3 text-sm font-medium text-center text-white"
+                className="w-full sm:w-auto rounded-2xl bg-teal-600/80 hover:bg-teal-600 px-5 py-3 text-sm font-medium text-center text-white"
               >
                 Unirse al Copy (enlace especial)
               </a>
               <a
                 href={BROKER_URL}
-                className="w-full sm:w-auto rounded-2xl border border-neutral-700
-                           px-5 py-3 text-sm font-medium hover:bg-neutral-900 text-center"
+                className="w-full sm:w-auto rounded-2xl border border-neutral-700 px-5 py-3 text-sm font-medium hover:bg-neutral-900 text-center"
               >
                 Crear cuenta en el broker
               </a>
               <a
-  href={WHATSAPP_URL}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="w-full sm:w-auto rounded-2xl bg-green-600 hover:bg-green-700
-             px-5 py-3 text-sm font-medium text-center text-white"
->
-  Hablar por WhatsApp
-</a>
-
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto rounded-2xl bg-green-600 hover:bg-green-700 px-5 py-3 text-sm font-medium text-center text-white"
+              >
+                Hablar por WhatsApp
+              </a>
               <button
                 onClick={() => setOpenRisk(true)}
-                className="w-full sm:w-auto rounded-2xl border border-neutral-700
-                           px-5 py-3 text-sm font-medium hover:bg-neutral-900 text-center"
+                className="w-full sm:w-auto rounded-2xl border border-neutral-700 px-5 py-3 text-sm font-medium hover:bg-neutral-900 text-center"
               >
                 Leer aviso de riesgos
               </button>
@@ -277,17 +253,9 @@ export default function LandingAUDCADPRO() {
               className="group inline-flex items-center gap-1 text-sm text-teal-300 hover:underline"
             >
               Ver informes
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                aria-hidden="true"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+                className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true">
                 <path d="M13 7H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6" />
                 <path d="M15 3h6v6" />
                 <path d="M21 3l-9 9" />
@@ -312,17 +280,14 @@ export default function LandingAUDCADPRO() {
               <img
                 src="https://widget.myfxbook.com/widget/widget.png?accountOid=11648035&type=3"
                 alt="Estadísticas AUDCAD PRO en Myfxbook"
-                width={1200}
-                height={800}
-                loading="lazy"
-                className="w-full h-auto"
+                width={1200} height={800} loading="lazy" className="w-full h-auto"
               />
             </a>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
+      {/* HOW */}
       <section id="how" className="mx-auto max-w-7xl px-4 py-16">
         <h3 className="text-2xl md:text-3xl font-semibold">Cómo empezar en 3 pasos</h3>
         <div className="mt-8 grid md:grid-cols-3 gap-6">
@@ -381,7 +346,9 @@ export default function LandingAUDCADPRO() {
       <section id="contact" className="mx-auto max-w-7xl px-4 pb-20">
         <div className="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6">
           <h3 className="text-2xl md:text-3xl font-semibold">¿Hablamos?</h3>
-          <p className="mt-2 text-neutral-300 text-sm">Escríbenos para dudas, verificación de métricas o acompañamiento en el alta.</p>
+          <p className="mt-2 text-neutral-300 text-sm">
+            Escríbenos para dudas, verificación de métricas o acompañamiento en el alta.
+          </p>
 
           <form
             action="https://formspree.io/f/myzplpzg"
@@ -389,51 +356,36 @@ export default function LandingAUDCADPRO() {
             onSubmit={handleSubmit}
             className="mt-6 grid md:grid-cols-3 gap-3"
           >
-            {/* Nombre */}
             <div className="md:col-span-1">
               <label className="sr-only" htmlFor="name">Nombre</label>
               <input
-                id="name"
-                name="name"
-                required
+                id="name" name="name" required
                 className="rounded-xl bg-neutral-950 border border-neutral-800 px-4 py-3 text-sm w-full"
                 placeholder="Nombre"
               />
             </div>
 
-            {/* Email */}
             <div className="md:col-span-1">
               <label className="sr-only" htmlFor="email">Email</label>
               <input
-                id="email"
-                name="email"
-                type="email"
-                required
+                id="email" name="email" type="email" required
                 className="rounded-xl bg-neutral-950 border border-neutral-800 px-4 py-3 text-sm w-full"
                 placeholder="Email"
               />
             </div>
 
-            {/* Mensaje */}
             <div className="md:col-span-3">
               <label className="sr-only" htmlFor="message">Mensaje</label>
               <textarea
-                id="message"
-                name="message"
-                required
-                rows={4}
+                id="message" name="message" required rows={4}
                 className="rounded-xl bg-neutral-950 border border-neutral-800 px-4 py-3 text-sm w-full"
                 placeholder="¿En qué podemos ayudarte?"
               />
             </div>
 
-            {/* Honeypot anti-spam (oculto) */}
             <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
-
-            {/* Asunto opcional */}
             <input type="hidden" name="_subject" value="Nuevo mensaje desde audcadpro.es" />
 
-            {/* Consentimiento GDPR */}
             <div className="md:col-span-3">
               <label className="flex items-start gap-2 text-xs text-neutral-300">
                 <input type="checkbox" name="consent" required className="mt-1" />
@@ -443,21 +395,19 @@ export default function LandingAUDCADPRO() {
               </label>
             </div>
 
-            {/* Botón de envío */}
             <div className="md:col-span-3">
               <button
                 type="submit"
-                disabled={status === 'sending'}
+                disabled={status === "sending"}
                 className="rounded-xl bg-teal-600/80 hover:bg-teal-600 disabled:opacity-60 px-4 py-3 text-sm font-medium"
               >
-                {status === 'sending' ? 'Enviando…' : 'Enviar'}
+                {status === "sending" ? "Enviando…" : "Enviar"}
               </button>
             </div>
 
-            {/* Mensajes de estado */}
             <div className="md:col-span-3" role="status" aria-live="polite">
-              {status === 'ok' && <p className="text-green-400 text-sm mt-2">¡Gracias! Te responderemos en breve.</p>}
-              {status === 'error' && <p className="text-red-400 text-sm mt-2">Ups, hubo un problema. Inténtalo de nuevo.</p>}
+              {status === "ok" && <p className="text-green-400 text-sm mt-2">¡Gracias! Te responderemos en breve.</p>}
+              {status === "error" && <p className="text-red-400 text-sm mt-2">Ups, hubo un problema. Inténtalo de nuevo.</p>}
             </div>
           </form>
 
@@ -477,7 +427,6 @@ export default function LandingAUDCADPRO() {
             </p>
           </div>
 
-          {/* Legal */}
           <div>
             <div className="font-semibold">Legal</div>
             <ul className="mt-2 space-y-1 text-neutral-400">
@@ -504,11 +453,10 @@ export default function LandingAUDCADPRO() {
                 </a>
               </li>
               <li>
-  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:underline">
-    WhatsApp
-  </a>
-</li>
-
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  WhatsApp
+                </a>
+              </li>
               <li><a href="#" className="hover:underline">YouTube</a></li>
               <li><a href="#" className="hover:underline">X (Twitter)</a></li>
             </ul>
@@ -533,15 +481,18 @@ export default function LandingAUDCADPRO() {
               <p>Siempre ajusta tu tamaño de copia y límites de pérdida a tu situación personal.</p>
             </div>
             <div className="mt-5 text-right">
-              <button onClick={() => setOpenRisk(false)} className="rounded-xl bg-teal-600/80 hover:bg-teal-600 px-4 py-2 text-sm font-medium">Entendido</button>
+              <button onClick={() => setOpenRisk(false)} className="rounded-xl bg-teal-600/80 hover:bg-teal-600 px-4 py-2 text-sm font-medium">
+                Entendido
+              </button>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
 
+/* ====== Helpers ====== */
 function Metric({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
     <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4">

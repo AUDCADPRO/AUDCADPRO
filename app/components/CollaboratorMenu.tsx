@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-export default function SiteMenu({
-  vtradeUrl, // (opcional) si quieres inyectar enlace especial
-}: { vtradeUrl?: string }) {
+export default function CollaboratorMenu({
+  vtradeUrl,
+}: { vtradeUrl: string }) {
   const ref = useRef<HTMLDetailsElement>(null);
 
   // Cerrar al hacer clic/tap fuera
@@ -13,7 +13,6 @@ export default function SiteMenu({
       if (!el) return;
       if (!el.open) return;
       const target = e.target as Node;
-      // Si el click fue fuera del <details>, cerramos
       if (!el.contains(target)) el.open = false;
     }
     document.addEventListener("pointerdown", onPointerDown, true);
@@ -59,20 +58,20 @@ export default function SiteMenu({
             Guía: Abrir cuenta
           </a>
 
-          {/* Si recibes vtradeUrl, úsalo; si no, apunta a la guía genérica o a la URL por defecto */}
+          {/* 🔗 Aquí va el enlace especial del colaborador */}
           <a
-            href={vtradeUrl ?? "/guia-vincular-copy"}
+            href={vtradeUrl}
             className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70 text-teal-300"
-            target={vtradeUrl ? "_blank" : undefined}
-            rel={vtradeUrl ? "noopener noreferrer" : undefined}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Guía: Vincular Copy {vtradeUrl ? "(enlace especial)" : ""}
+            Guía: Vincular Copy (enlace especial)
           </a>
 
           <a href="/convertirse-en-colaborador" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">
             Convertirse en colaborador
           </a>
-          <a href="/historia-del-algoritmo" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">
+          <a href="/sobre-la-estrategia" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">
             Historia del Algoritmo
           </a>
           <a href="/sobre-mi" className="block rounded-lg px-3 py-2 hover:bg-neutral-800/70">
