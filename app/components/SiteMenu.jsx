@@ -35,7 +35,7 @@ function MobileDrawer({ open, onClose, children }) {
         className={[
           "fixed top-0 right-0 z-[120] md:hidden",
           "bg-[#0b1220] text-white",
-          "h-[100dvh] w-[80%] max-w-sm", // ancho del panel
+          "h-[100dvh] w-[80%] max-w-sm",
           "overflow-y-auto overscroll-contain",
           "px-4 pt-4 pb-[calc(20px+env(safe-area-inset-bottom))]",
           "transform transition-transform duration-300 ease-out",
@@ -63,8 +63,8 @@ function MobileDrawer({ open, onClose, children }) {
   );
 }
 
-
-export default function SiteMenu({ vtradeUrl }) {
+export default function SiteMenu(props) {
+  const vtradeUrl = props?.vtradeUrl; // ← opcional
   const desktopRef = useRef(null);
   const [openMobile, setOpenMobile] = useState(false);
 
@@ -144,7 +144,6 @@ export default function SiteMenu({ vtradeUrl }) {
                      px-3 py-2 text-sm text-neutral-200 hover:bg-neutral-900 outline-none"
           aria-label="Abrir menú"
           onClick={(e) => {
-            // evita que el click haga scroll a la posición del summary
             e.preventDefault();
             const el = desktopRef.current;
             if (!el) return;
