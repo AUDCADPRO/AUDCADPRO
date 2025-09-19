@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 // ---- EDITA SOLO ESTAS CONSTANTES ----
 const ORG_NAME = "AUDCAD PRO";
-const CONTACT_EMAIL = "jandroinvestor@gmail.com"; // ← corregido
+const CONTACT_EMAIL = "info@audcadpro.es"; // ← corregido
 const ADDRESS = "SPAIN"; // opcional: "C/ Ejemplo 123, Ciudad, País"
 const LAST_UPDATED = "10/08/2025";
 // --------------------------------------

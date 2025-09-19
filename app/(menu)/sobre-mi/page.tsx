@@ -50,7 +50,7 @@ export default function SobreMiPage() {
             <Link href="https://t.me/AUDCAD_PRO_MARIO" target="_blank" className="btn btn-blue">
               Hablar por Telegram
             </Link>
-            <Link href="mailto:jandroinvestor@gmail.com" className="btn btn-dark">
+            <Link href="mailto:info@audcadpro.es" className="btn btn-dark">
               Escribir por Email
             </Link>
           </div>

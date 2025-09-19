@@ -33,14 +33,14 @@ const orgSchema = {
   "name": "AUDCAD PRO",
   "url": "https://www.audcadpro.es",
   "logo": "https://www.audcadpro.es/icon.png",
-  "email": "mailto:jandroninvestor@gmail.com",
+  "email": "mailto:info@audcadpro.es",
   "sameAs": ["https://t.me/AUDCAD_PRO_MARIO"],
   "foundingDate": "2022",
   "address": { "@type": "PostalAddress", "addressCountry": "ES" },
   "contactPoint": [{
     "@type": "ContactPoint",
     "contactType": "customer support",
-    "email": "mailto:jandroinvestor@gmail.com",
+    "email": "mailto:info@audcadpro.es",
     "availableLanguage": ["es"]
   }]
 };

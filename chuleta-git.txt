@@ -1,0 +1,28 @@
+📌 Chuleta Git + Vercel (Proyecto audcadpro)
+
+1) Ver si hay cambios pendientes
+   git status
+
+2) Guardar cambios en un commit
+   git add .
+   git commit -m "mensaje corto explicando el cambio"
+
+3) Subir a GitHub (y desplegar en Vercel)
+   git push origin main
+
+4) Ver historial rápido
+   git log --oneline -5
+
+5) Forzar un deploy sin cambios
+   git commit --allow-empty -m "trigger vercel deploy"
+   git push origin main
+
+⚠️ Situaciones típicas
+- "nothing to commit" → no editaste nada o ya está guardado.
+- "error: src refspec main does not match any" → asegúrate de estar en main:
+    git branch
+    git checkout main
+- Si pide login/token → inicia sesión en GitHub desde consola, o usa un Personal Access Token.
+
+👉 Flujo básico:
+   git status → git add . → git commit -m "..." → git push origin main
